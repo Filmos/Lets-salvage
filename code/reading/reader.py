@@ -25,3 +25,6 @@ class Reader:
         for file in os.listdir(self.path + "/mods"):
             with ZipGlobProxy(self.path + "/mods/" + file) as path:
                 yield path
+
+    def clone(self) -> 'Reader':
+        return Reader(self.path)
