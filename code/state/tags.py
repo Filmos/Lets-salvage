@@ -24,12 +24,11 @@ class Tag:
     def __repr__(self) -> str:
         return f"#{self.name}({', '.join([str(v) for v in self.values])})"
 
-class Tags:
+class TagsManager:
     def __init__(self):
         self.tags = {}
 
-    def parse(self, filename: str, data: str):
-        # print(data)
+    def parse(self, filename: str, data: str) -> None:
         data = json.loads(data)
         if "values" not in data:
             raise Exception("Invalid item tag file: " + filename)
