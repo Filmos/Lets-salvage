@@ -16,7 +16,7 @@ class ShapedRecipe:
         for ingredient in keys.keys():
             ingredients.append(Ingredient.make(data["key"][ingredient], amount=keys[ingredient]))
         
-        return Recipe(ingredients, Item(**data["result"]))
+        return Recipe(ingredients=ingredients, result=[Item(**data["result"])])
     
 
 class ShapelessRecipe:
@@ -30,7 +30,7 @@ class ShapelessRecipe:
             else:
                 ingredients[item.id].amount += item.amount
         
-        return Recipe(list(ingredients.values()), Item(**data["result"]))
+        return Recipe(ingredients=list(ingredients.values()), result=[Item(**data["result"])])
     
 Recipe.register("minecraft:crafting_shaped", ShapedRecipe.make)
 Recipe.register("minecraft:crafting_shapeless", ShapelessRecipe.make)

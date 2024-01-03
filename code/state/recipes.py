@@ -20,7 +20,8 @@ class RecipesManager:
         if recipe is None:
             return
 
-        self.recipes[recipe.result.item].append(recipe)
+        for result in recipe.result:
+            self.recipes[result.item].append(recipe)
 
     def of(self, item: str) -> list[Recipe]:
         return self.recipes[item]

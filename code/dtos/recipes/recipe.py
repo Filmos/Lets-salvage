@@ -1,16 +1,15 @@
-from typing import Optional
+from typing import Callable, ClassVar, Optional
+from pydantic import BaseModel
 from dtos.items import Ingredient, Item
 
 
-class Recipe:
-    interpreters = {}
-
-    def __init__(self, ingredients: list[Ingredient], result: Item):
-        self.ingredients = ingredients
-        self.result = result
+class Recipe(BaseModel):
+    interpreters: ClassVar[dict[str, Callable]] = {}
+    ingredients: list[Ingredient]
+    result: list[Item]
 
     @classmethod
-    def register(cls, id: str, interpreter: callable):
+    def register(cls, id: str, interpreter: Callable):
         cls.interpreters[id] = interpreter
 
     @classmethod
